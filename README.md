@@ -16,8 +16,8 @@
 * TBA
     
 # Progress
-* # Week 1: 22-28.06.2020:
-    * # 25.06.2020:
+* **Week 1: 22-28.06.2020**:
+    * **25.06.2020**:
         * added alpha version of player movement
         * added player texture
         * added pre-version of colliding objects
