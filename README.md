@@ -1,5 +1,3 @@
-
-
 #Game Mechanics:
     * player has to pass certain levels, segregated by difficulty
     * player has \textbf{Heatlh points}, that can be lost by objects giving some damage
