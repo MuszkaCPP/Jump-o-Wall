@@ -8,10 +8,10 @@
 # Audio:
     * TBA
 # Technologies:
-    - Unity 2019.4.0f1
-    - Fire Alpaca
-    - Visual Studio Code
-    - git
+* Unity 2019.4.0f1
+* Fire Alpaca
+* Visual Studio Code
+* git
 # Production process:
     * TBA
     
