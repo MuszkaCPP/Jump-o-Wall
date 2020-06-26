@@ -1,23 +1,23 @@
 
 
-##Game Mechanics:
+#Game Mechanics:
     * player has to pass certain levels, segregated by difficulty
     * player has \textbf{Heatlh points}, that can be lost by objects giving some damage
     * every move is simulated by physics implemented in Unity Engine
-##Graphics:
+#Graphics:
     * +/- pixel art (32x32, 64x64)
     * free Unity Store assets
-##Audio:
+#Audio:
     * TBA
-##Technologies:
+#Technologies:
     * Unity 2019.4.0f1
     * Fire Alpaca
     * Visual Studio Code
     * git
-##Production process:
+#Production process:
     * TBA
     
-##Progress
+#Progress
     * #Week 1: 22-28.06.2020:
             * #25.06.2020:
                     * added alpha version of player movement
