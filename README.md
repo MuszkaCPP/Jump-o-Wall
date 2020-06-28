@@ -1,6 +1,6 @@
 # Game Mechanics:
 * player has to pass certain levels, segregated by difficulty
-* player has \textbf{Heatlh points}, that can be lost by objects giving some damage
+* player has **Heatlh points**, that can be lost by objects giving some damage
 * every move is simulated by physics implemented in Unity Engine
 # Graphics:
 * +/- pixel art (32x32, 64x64)
