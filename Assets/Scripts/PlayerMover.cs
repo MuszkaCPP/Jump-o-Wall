@@ -16,16 +16,18 @@ public class PlayerMover : MonoBehaviour
     private bool canMove = true;
 
     private Rigidbody2D rb2D;
+    private PlayerController playerController;
 
     private void Awake() {
         rb2D = gameObject.GetComponent<Rigidbody2D>();
+        playerController = gameObject.GetComponent<PlayerController>();
     }
     
 
     void Update()
     {
 
-        if(!canMove){
+        if(!playerController.IsPlayerInMovingState()){
             return;
         }
 
@@ -117,7 +119,4 @@ public class PlayerMover : MonoBehaviour
 
     }
 
-    public void setMoveState(bool state){
-        canMove = state;
-    }
 }

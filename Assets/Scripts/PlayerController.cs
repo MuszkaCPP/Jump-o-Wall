@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {   
     private MainPlayer player;
-    private PlayerMover playerMover;
     private PlayerStateEnum playerState;
 
     public enum PlayerStateEnum{
@@ -16,11 +15,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake() {
         player = gameObject.GetComponent<MainPlayer>();
-        playerMover = gameObject.GetComponent<PlayerMover>();
-    }
-    void Update()
-    {
-        
     }
 
     public void SetPlayerState(string playerState){
@@ -39,5 +33,14 @@ public class PlayerController : MonoBehaviour
 
     public PlayerStateEnum GetPlayerState(){
         return playerState;
+    }
+
+    //change name of func
+    public bool IsPlayerInMovingState(){
+        if(playerState == PlayerStateEnum.Moving){
+            return true;
+        }
+
+        return false;
     }
 }
