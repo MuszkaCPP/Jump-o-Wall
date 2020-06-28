@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerController))]
+[RequireComponent(typeof(LevelEnder))]
+
 public class GameManager : MonoBehaviour {
       
     private PlayerController playerController;

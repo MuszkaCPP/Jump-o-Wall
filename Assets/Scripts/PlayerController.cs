@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MainPlayer))]
+
 public class PlayerController : MonoBehaviour
 {   
     private MainPlayer player;
@@ -17,6 +19,7 @@ public class PlayerController : MonoBehaviour
         player = gameObject.GetComponent<MainPlayer>();
     }
 
+    //TODO: BETTER SETTER CONNECTED WITH SECURITY
     public void SetPlayerState(string playerState){
         switch(playerState){
             case "Moving":

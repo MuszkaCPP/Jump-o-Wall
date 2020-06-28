@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(PlayerController))]
+
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] float horizontalForce = 200f;
@@ -11,12 +14,11 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] float spacePower = 3f;
     [SerializeField] float dashPower = 2f;
 
-    private float spaceForce;
-    private bool isLoadingForce = false;
-    private bool canMove = true;
-
     private Rigidbody2D rb2D;
     private PlayerController playerController;
+
+    private float spaceForce;
+    private bool isLoadingForce = false;
 
     private void Awake() {
         rb2D = gameObject.GetComponent<Rigidbody2D>();
@@ -46,6 +48,10 @@ public class PlayerMover : MonoBehaviour
             }
             else if (Input.GetKeyDown("d")){
                 Move("d");
+            }
+            else if (Input.GetKeyDown("w"))
+            {
+                Move("w");
             }
 
             if (Input.GetKeyDown("space")){
@@ -86,6 +92,12 @@ public class PlayerMover : MonoBehaviour
 
                 Vector2 right_velocity = new Vector2(horizontalForce, verticalForce);
                 rb2D.AddForce(right_velocity);
+
+                break;
+            case "w":
+
+                Vector2 up_velocity = new Vector2(0, verticalForce);
+                rb2D.AddForce(up_velocity);
 
                 break;
             case "a_dash":
