@@ -18,10 +18,11 @@ public class PlayerMover : MonoBehaviour
 
     private Rigidbody2D rb2D;
     private PlayerController playerController;
+    private RaycastHit2D wallRaycast;
 
     private float spaceForce;
+
     private bool isLoadingForce = false;
-    private RaycastHit2D wallRaycast;
 
     private void Awake() {
         rb2D = gameObject.GetComponent<Rigidbody2D>();

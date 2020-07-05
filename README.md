@@ -26,4 +26,10 @@
         * alpha version of managing the state of player
         * added protection for lack of component
         * added move-up feature
+* **Week 2: 29.06-05.07.2020**:
+    * **1-4.07.2020**:
+        **VACATION**
+    * **05.05.2020**:
+        * added "grip to wall" move
+        * some code cleaning
 
