@@ -145,7 +145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 81445381}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.2251654, y: -3.0362327, z: -4.335014}
+  m_LocalPosition: {x: -2.2251654, y: -3.0362327, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 231622236}
@@ -237,12 +237,12 @@ GameObject:
   - component: {fileID: 231622236}
   - component: {fileID: 231622235}
   - component: {fileID: 231622234}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!61 &231622234
 BoxCollider2D:
@@ -328,7 +328,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 231622233}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.4248347, y: 3.0662327, z: 4.335014}
+  m_LocalPosition: {x: -3.4248347, y: 3.0662327, z: 0}
   m_LocalScale: {x: 1.694571, y: 7.9551926, z: 0.98236}
   m_Children: []
   m_Father: {fileID: 81445382}
@@ -446,7 +446,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245419252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.18999952, y: -0.097367555, z: -13.360278}
+  m_LocalPosition: {x: 0.19, y: -0.097367555, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -512,7 +512,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380380589}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.18999952, y: -0.097367555, z: -13.360278}
+  m_LocalPosition: {x: 0.19, y: -0.097367555, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 817271821}
@@ -755,7 +755,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1535383941}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.19, y: -0.192, z: -0.36027837}
+  m_LocalPosition: {x: 0.19, y: -0.192, z: 0}
   m_LocalScale: {x: 3.227404, y: 3.3280628, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -831,7 +831,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &1535383945
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -874,10 +874,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalForce: 200
   verticalForce: 250
-  MaximumSpeed: 350
+  maximumSpeed: 350
   maxMagnitude: 8
   spacePower: 3
   dashPower: 2
+  maxGrippingDistanceToWall: 1
+  gripPower: 4.12
 --- !u!1 &1605839728
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,12 +891,12 @@ GameObject:
   - component: {fileID: 1605839731}
   - component: {fileID: 1605839730}
   - component: {fileID: 1605839729}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!61 &1605839729
 BoxCollider2D:
@@ -980,7 +982,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1605839728}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.885165, y: 3.0662327, z: 4.335014}
+  m_LocalPosition: {x: 7.885165, y: 3.0662327, z: 0}
   m_LocalScale: {x: 1.694571, y: 7.9551926, z: 0.98236}
   m_Children: []
   m_Father: {fileID: 81445382}
@@ -997,7 +999,7 @@ GameObject:
   - component: {fileID: 1926824001}
   - component: {fileID: 1926824000}
   - component: {fileID: 1926823999}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1088,7 +1090,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926823998}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 2.2551653, y: 7.536233, z: 4.335014}
+  m_LocalPosition: {x: 2.2551653, y: 7.536233, z: 0}
   m_LocalScale: {x: 1.6945711, y: 15.512626, z: 0.98236}
   m_Children: []
   m_Father: {fileID: 81445382}
@@ -1148,7 +1150,7 @@ GameObject:
   - component: {fileID: 2036113591}
   - component: {fileID: 2036113590}
   - component: {fileID: 2036113589}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1239,7 +1241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2036113588}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 2.2551653, y: -1.4537671, z: 4.335014}
+  m_LocalPosition: {x: 2.2551653, y: -1.4537671, z: 0}
   m_LocalScale: {x: 1.6945711, y: 15.512626, z: 0.98236}
   m_Children: []
   m_Father: {fileID: 81445382}

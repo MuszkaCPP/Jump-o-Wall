@@ -9,16 +9,19 @@ public class PlayerMover : MonoBehaviour
 {
     [SerializeField] float horizontalForce = 200f;
     [SerializeField] float verticalForce = 250f;
-    [SerializeField] float MaximumSpeed = 350f;
+    [SerializeField] float maximumSpeed = 350f;
     [SerializeField] float maxMagnitude = 5f;
     [SerializeField] float spacePower = 3f;
     [SerializeField] float dashPower = 2f;
+    [SerializeField] float maxGrippingDistanceToWall = 10f;
+    [SerializeField] float gripPower = 2f;
 
     private Rigidbody2D rb2D;
     private PlayerController playerController;
 
     private float spaceForce;
     private bool isLoadingForce = false;
+    private RaycastHit2D wallRaycast;
 
     private void Awake() {
         rb2D = gameObject.GetComponent<Rigidbody2D>();
@@ -30,6 +33,11 @@ public class PlayerMover : MonoBehaviour
     {
 
         if(!playerController.IsPlayerInMovingState()){
+            return;
+        }
+        
+        if(CanPlayerGripToWall() && Input.GetKey(KeyCode.Q)){
+            Move("grip");
             return;
         }
 
@@ -49,8 +57,7 @@ public class PlayerMover : MonoBehaviour
             else if (Input.GetKeyDown("d")){
                 Move("d");
             }
-            else if (Input.GetKeyDown("w"))
-            {
+            else if (Input.GetKeyDown("w")){
                 Move("w");
             }
 
@@ -66,9 +73,8 @@ public class PlayerMover : MonoBehaviour
             if (Input.GetKeyUp("space")){
                 isLoadingForce = false;
 
-                if (spaceForce > MaximumSpeed)
-                {
-                    spaceForce = MaximumSpeed;
+                if (spaceForce > maximumSpeed){
+                    spaceForce = maximumSpeed;
                 }
 
                 JumpUp(spaceForce);
@@ -83,32 +89,35 @@ public class PlayerMover : MonoBehaviour
 
         switch (inputKey){
             case "a":
-
                 Vector2 left_velocity = new Vector2(-horizontalForce, verticalForce);
                 rb2D.AddForce(left_velocity);
-
                 break;
             case "d":
-
                 Vector2 right_velocity = new Vector2(horizontalForce, verticalForce);
                 rb2D.AddForce(right_velocity);
-
                 break;
             case "w":
-
                 Vector2 up_velocity = new Vector2(0, verticalForce);
                 rb2D.AddForce(up_velocity);
-
                 break;
             case "a_dash":
-
                 Vector2 left_dash_velocity = new Vector2(-horizontalForce * dashPower, 0);
                 rb2D.AddForce(left_dash_velocity);
                 break;
             case "d_dash":
-
                 Vector2 right_dash_velocity = new Vector2(horizontalForce * dashPower, 0);
                 rb2D.AddForce(right_dash_velocity);
+                break;
+            case "grip":
+                int direction = 1;
+
+                //Direction check
+                if(wallRaycast.transform.position.x - transform.position.x < 0){
+                    direction = -1;
+                }
+
+                Vector2 grip_velocity = new Vector2(direction * horizontalForce * gripPower, 0);
+                rb2D.AddForce(grip_velocity);
                 break;
         }
 
@@ -129,6 +138,17 @@ public class PlayerMover : MonoBehaviour
         Vector2 velocity = new Vector2(0.0f, force);
         rb2D.AddForce(velocity);
 
+    }
+
+    bool CanPlayerGripToWall(){
+        Vector2 playerPosition = transform.position;
+        wallRaycast = Physics2D.Raycast(playerPosition, Vector2.left, maxGrippingDistanceToWall, 1 << LayerMask.NameToLayer("Wall"));
+
+        if(wallRaycast.collider != null){
+            return true;
+        }
+
+        return false;
     }
 
 }
