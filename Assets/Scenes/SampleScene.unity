@@ -220,7 +220,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129383320}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.28979966, y: 3.67, z: -76.548}
+  m_LocalPosition: {x: 0.28979966, y: 4.87, z: -76.548}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 231622234}
   m_Layer: 8
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -756,7 +756,7 @@ Transform:
   m_GameObject: {fileID: 1535383941}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.19, y: -0.192, z: 0}
-  m_LocalScale: {x: 3.227404, y: 3.3280628, z: 1}
+  m_LocalScale: {x: 2.4963973, y: 2.5742567, z: 0.7735}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -826,7 +826,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0.5
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.9
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -874,12 +874,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalForce: 200
   verticalForce: 250
-  maximumSpeed: 350
-  maxMagnitude: 8
-  spacePower: 3
+  maxMagnitude: 7
   dashPower: 2
-  maxGrippingDistanceToWall: 1
-  gripPower: 4.12
+  maxGrippingDistanceToWall: 2
+  gripPower: 2.5
+  bouncePower: 40
 --- !u!1 &1605839728
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,7 +892,7 @@ GameObject:
   - component: {fileID: 1605839729}
   m_Layer: 8
   m_Name: Wall (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

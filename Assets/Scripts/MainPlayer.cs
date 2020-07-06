@@ -17,7 +17,7 @@ public class MainPlayer : PlayerController
             SetPlayerState("Dead");
         }
 
-        Debug.Log("Current Healh :" + currentHealth);
+        Debug.Log("Current Health :" + currentHealth);
 
     }
 

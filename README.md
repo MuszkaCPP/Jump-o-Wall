@@ -32,4 +32,11 @@
     * **05.05.2020**:
         * added "grip to wall" move
         * some code cleaning
+* **Week 3: 6-13.07.2020**:
+    * **06.07.2020**:
+        * movement code cleaning/improvement for better optimization
+        * removed "space-jump" move
+        * changed movement variables for better gameplay
+        * fixed gripping to the right wall
+        * added simple bouncing off by the walls
 
