@@ -9,17 +9,16 @@ public class PlayerMover : MonoBehaviour
 {
     [SerializeField] float horizontalForce = 200f;
     [SerializeField] float verticalForce = 250f;
-    [SerializeField] float MaximumSpeed = 350f;
-    [SerializeField] float maxMagnitude = 5f;
-    [SerializeField] float spacePower = 3f;
+    [SerializeField] float maxMagnitude = 7f;
     [SerializeField] float dashPower = 2f;
+    [SerializeField] float maxGrippingDistanceToWall = 2f;
+    [SerializeField] float gripPower = 2.5f;
+    [SerializeField] float bouncePower = 40f;
 
     private Rigidbody2D rb2D;
     private PlayerController playerController;
-
-    private float spaceForce;
-    private bool isLoadingForce = false;
-
+    private RaycastHit2D leftWallRaycast;
+    private Vector3 lastFrameVelocity;
     private void Awake() {
         rb2D = gameObject.GetComponent<Rigidbody2D>();
         playerController = gameObject.GetComponent<PlayerController>();
@@ -28,8 +27,14 @@ public class PlayerMover : MonoBehaviour
 
     void Update()
     {
+        lastFrameVelocity = rb2D.velocity;
 
         if(!playerController.IsPlayerInMovingState()){
+            return;
+        }
+        
+        if(CanPlayerGripToWall() && Input.GetKey(KeyCode.Space)){
+            Move("grip");
             return;
         }
 
@@ -40,6 +45,7 @@ public class PlayerMover : MonoBehaviour
             else if(Input.GetKeyUp(KeyCode.D)){
                 Move("d_dash");
             }
+
         }
         else
         {
@@ -49,72 +55,51 @@ public class PlayerMover : MonoBehaviour
             else if (Input.GetKeyDown("d")){
                 Move("d");
             }
-            else if (Input.GetKeyDown("w"))
-            {
+            else if (Input.GetKeyDown("w")){
                 Move("w");
-            }
-
-            if (Input.GetKeyDown("space")){
-                spaceForce = 0f;
-                isLoadingForce = true;
-            }
-
-            if (Input.GetKey("space") && isLoadingForce){
-                spaceForce += spacePower;
-            }
-
-            if (Input.GetKeyUp("space")){
-                isLoadingForce = false;
-
-                if (spaceForce > MaximumSpeed)
-                {
-                    spaceForce = MaximumSpeed;
-                }
-
-                JumpUp(spaceForce);
             }
         }
 
-        
     }
 
     void Move(string inputKey){
-        rb2D.velocity = new Vector2(0.0f, rb2D.velocity.y);
-
+        rb2D.velocity = new Vector2(0.0f,0.0f);
+        Vector2 moveVelocity = new Vector2(horizontalForce, verticalForce);
+        
         switch (inputKey){
             case "a":
-
-                Vector2 left_velocity = new Vector2(-horizontalForce, verticalForce);
-                rb2D.AddForce(left_velocity);
-
+                moveVelocity *= new Vector2(-1, 1);
                 break;
             case "d":
-
-                Vector2 right_velocity = new Vector2(horizontalForce, verticalForce);
-                rb2D.AddForce(right_velocity);
-
                 break;
             case "w":
-
-                Vector2 up_velocity = new Vector2(0, verticalForce);
-                rb2D.AddForce(up_velocity);
-
+                moveVelocity *= new Vector2(0, 1);
                 break;
             case "a_dash":
-
-                Vector2 left_dash_velocity = new Vector2(-horizontalForce * dashPower, 0);
-                rb2D.AddForce(left_dash_velocity);
+                moveVelocity *= new Vector2(-1 * dashPower, 0);
                 break;
             case "d_dash":
+                moveVelocity *= new Vector2(dashPower, 0);
+                break;
+            case "grip":
+                int direction = 1;
 
-                Vector2 right_dash_velocity = new Vector2(horizontalForce * dashPower, 0);
-                rb2D.AddForce(right_dash_velocity);
+                if(leftWallRaycast.collider != null){
+                    //Direction check
+                    if(leftWallRaycast.transform.position.x - transform.position.x < 0){
+                        direction = -1;
+                    }
+                }
+
+                moveVelocity *= new Vector2(direction * gripPower, 0);
                 break;
         }
 
-        if (rb2D.velocity.magnitude > maxMagnitude){
+        rb2D.AddForce(moveVelocity);
 
-            rb2D.velocity = new Vector2(0.0f, 0.0f);
+        if (rb2D.velocity.magnitude > maxMagnitude && -rb2D.velocity.magnitude > maxMagnitude){
+
+            rb2D.velocity = Vector2.zero;
 
             Vector2 velocity = new Vector2(rb2D.velocity.x, verticalForce);
             rb2D.AddForce(velocity);
@@ -122,13 +107,27 @@ public class PlayerMover : MonoBehaviour
 
     }
 
-    void JumpUp(float force){
+    bool CanPlayerGripToWall(){
+        Vector2 playerPosition = transform.position;
+        RaycastHit2D rightWallRaycast = Physics2D.Raycast(playerPosition, Vector2.right, maxGrippingDistanceToWall, 1 << LayerMask.NameToLayer("Wall"));
 
-        rb2D.velocity = new Vector2(rb2D.velocity.x, 0.0f);
+        leftWallRaycast = Physics2D.Raycast(playerPosition, Vector2.left, maxGrippingDistanceToWall, 1 << LayerMask.NameToLayer("Wall"));
+        
+        if(leftWallRaycast.collider != null || rightWallRaycast.collider != null){
+            return true;
+        }
 
-        Vector2 velocity = new Vector2(0.0f, force);
-        rb2D.AddForce(velocity);
+        return false;
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision){
+        //Bouncing mechanism
+        if (collision.collider.transform.tag == "Wall"){
+            transform.Rotate(0,0,90);
+            rb2D.velocity = Vector2.zero;
+            rb2D.AddForce(lastFrameVelocity * new Vector2(-1 * bouncePower, 1.5f * bouncePower));
+            transform.Rotate(0,0,-90);
+        }
     }
 
 }
